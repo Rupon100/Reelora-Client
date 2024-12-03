@@ -13,15 +13,15 @@ const Root = () => {
                 <nav>
                    <Navbar></Navbar>
                 </nav>
-                <div>
+                {/* <div>
                     <Banner></Banner>
-                </div>
+                </div> */}
             </header>
-            <section className="bg-gradient-to-r from-black to-gray-800 p-4 md:space-y-10">
+            {/* <section className="bg-gradient-to-r from-black to-gray-800 p-4 md:space-y-10">
                 <Feature></Feature>
                 <Subscription></Subscription>
                 <Faq></Faq>
-            </section>
+            </section> */}
             <main>
                 <Outlet></Outlet>
             </main>

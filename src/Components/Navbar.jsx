@@ -7,7 +7,7 @@ const Navbar = () => {
     const links = <>
      <Link>Home</Link>
      <Link>All Movies</Link>
-     <Link>Subscription</Link>
+     <Link to='/blog'>Blog</Link>
     </>
 
     return (

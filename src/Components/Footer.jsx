@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer footer-center text-black p-10 flex flex-col items-center gap-4">
+            <footer className="footer footer-center text-black bg-gray-200 p-10 flex flex-col items-center gap-4">
               <aside>
                 <ul className="flex flex-col gap-1 md:gap-2 md:flex-row">
                     <Link to='' className="text-xs underline">Home</Link>
