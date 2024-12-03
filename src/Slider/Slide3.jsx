@@ -12,7 +12,7 @@ const Slide3 = () => {
         }}>
             <div className="absolute inset-0 bg-black opacity-45"></div>
             <div className="p-4 f-full md:max-w-2xl flex flex-col justify-center items-center gap-2 md:gap-4 text-white text-center z-10">
-                <h2 className="font-semibold text-2xl md:text-4xl text-white">Iron Man</h2>
+                <h2 className="font-semibold text-2xl md:text-4xl text-white">Money Heist</h2>
                 <div className="flex items-center gap-3">
                     <span className="bg-red-400 px-2 py-1 rounded">2k</span>
                     <span className="font-semibold">2020</span>

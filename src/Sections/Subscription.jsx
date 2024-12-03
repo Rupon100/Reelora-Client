@@ -26,7 +26,7 @@ const Subscription = () => {
                     <button className="btn bg-gray-800 hover:bg-gray-900 text-white">Get Started</button>
                 </div>     
             </div>
-            <div className="max-w-xl mx-auto bg-gradient-to-r from-pink-400 to-violet-400 flex justify-between items-center p-4 rounded">
+            <div className="max-w-xl mx-auto bg-gradient-to-r from-pink-400 to-violet-400 flex justify-between items-center p-4 rounded cursor-pointer text-white">
                 <h4 className="text-sm">Take a free trail</h4>
                 <p className="text-sm">Start 13 days free trail</p>
             </div>
