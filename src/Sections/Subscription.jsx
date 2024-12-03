@@ -1,7 +1,7 @@
 
 const Subscription = () => {
     return (
-        <div className="my-4 md:my-8 space-y-3 md:space-y-6 text-center">
+        <div className="my-4 md:my-8 py-4 md:py-8 space-y-3 md:space-y-6 text-center">
             <div className="space-y-4">
                 <h1 className="font-semibold text-2xl md:text-4xl text-white">Subscription</h1>
                 <p className="text-white">Unlock ad-free access to a vast library of movies and shows. Enjoy HD/4K streaming, offline downloads, and multi-device support. Choose from Basic, Standard, or Premium plans to suit your needs. Start your free trial today!</p>

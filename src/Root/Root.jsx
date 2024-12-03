@@ -4,6 +4,7 @@ import Banner from "../Components/Banner";
 import Feature from "../Sections/Feature";
 import Faq from "../Sections/Faq";
 import Subscription from "../Sections/Subscription";
+import Footer from "../Components/Footer";
 
 const Root = () => {
     return (
@@ -26,7 +27,7 @@ const Root = () => {
             </main>
 
             <footer>
-
+                <Footer></Footer>
             </footer>
         </div>
     );
