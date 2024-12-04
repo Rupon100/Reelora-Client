@@ -13,6 +13,17 @@ const AddMovie = () => {
     const addMovie = (e) => {
         e.preventDefault();
         const form = e.target;
+        const poster = form.value.poster; //check for link
+        const title = form.value.title; //min 2 char
+        const genre = form.value.genre; //
+        const time = form.value.time; //must not empty grater then 60 as minitues input
+        const year = form.value.year; //must check given input isn't empty
+        const ratingg = rating; // must
+        const msg = form.value.msg; //min 10 char
+
+        const newMovie = { poster, title, genre, time, year, ratingg, msg }
+        console.log(newMovie)
+
     }
     
 
@@ -40,8 +51,8 @@ const AddMovie = () => {
                         <label className="label">
                            <span className="label-text">Genre type</span>
                         </label>
-                        <select className="select select-bordered w-full">
-                          {/* <option disabled selected>What is ?</option> */}
+                        <select name='genre' className="select select-bordered w-full">
+                          <option disabled selected>select one</option>
                           <option>Comedy</option>
                           <option>Drama</option>
                           <option>Horror</option>
@@ -59,8 +70,8 @@ const AddMovie = () => {
                        <label className="label">
                             <span className="label-text">Release Year</span>
                        </label>
-                       <select className="select select-bordered w-full">
-                         {/* <option disabled selected>Release Year</option> */}
+                       <select name='year' className="select select-bordered w-full">
+                         <option disabled selected>select one</option>
                          <option>2024</option>
                          <option>2023</option>
                          <option>2022</option>
@@ -76,7 +87,7 @@ const AddMovie = () => {
                   <div className='w-full border'>
                     <textarea name="msg" className="resize-none w-full p-4 md:p-10" placeholder="Give a summery"></textarea>
                   </div>
-                  <button type='button' className='btn btn-block font-semibold'>Add</button>
+                  <button type='submit' className='btn btn-block font-semibold'>Add</button>
                 </form>
             </div>
         </div>

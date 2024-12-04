@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
+import { FcGoogle } from "react-icons/fc";
  
 
 const Register = () => {
 
-    const { registerUser } = useContext(authContext);
+    const { registerUser,googleLogin, setUser } = useContext(authContext);
     const navigate = useNavigate();
     const [error, setError] = useState(false);
 
@@ -34,9 +35,21 @@ const Register = () => {
       .catch(error => {
         console.log(error.message)
         setError(true)
-      })
-       
+      })     
 
+    }
+    
+    const handleGoogle = () => {
+      googleLogin()
+        .then(result => {
+          console.log(result.user);
+          setUser(result.user);
+          navigate('/')
+        })
+        .catch(error => {
+          setError(true)
+          console.log(error.message)
+        })
     }
 
     return (
@@ -73,6 +86,8 @@ const Register = () => {
 
                 <div className="form-control mt-6">
                   <button className="bg-gray-800 p-2 rounded text-white hover:bg-gray-900 transition-all">Register</button>
+                  <div className="divider">OR</div>
+                  <button onClick={handleGoogle} type="button" className="flex justify-center items-center gap-3 border p-2 rounded hover:bg-gray-800 hover:text-white transition-all"><FcGoogle /> <h3>Google</h3></button>
                 </div>
                 <small className="mt-2">Have an account? <Link to='/login' className="font-semibold">Login</Link></small>
               </form>
