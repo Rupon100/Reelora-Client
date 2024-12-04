@@ -1,11 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
 
 const Login = () => {
 
     const { setUser, loginUser, googleLogin } = useContext(authContext);
+    const [error, setError] = useState(false);
+
+    const navigate = useNavigate();
 
     const userLogin = (e) => {
         e.preventDefault();
@@ -15,13 +18,21 @@ const Login = () => {
         const user = { email,pass };
         console.log(user);
 
+        const passRegx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if(!passRegx.test(pass)){
+          setError(true);
+          return;
+        }
+        setError(false);
 
         loginUser(email, pass)
         .then(result => {
           console.log(result.user);
           setUser(result.user);
+          navigate('/')
         })
         .catch(error => {
+          setError(true)
           console.log(error.message)
         })
     }
@@ -31,8 +42,10 @@ const Login = () => {
         .then(result => {
           console.log(result.user);
           setUser(result.user);
+          navigate('/')
         })
         .catch(error => {
+          setError(true)
           console.log(error.message)
         })
     }
@@ -58,6 +71,10 @@ const Login = () => {
                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                   </label>
                 </div>
+
+                <span className="text-xs font-semibold text-red-500">{error && 'Password must be 6+ characters with at least one uppercase and one lowercase letter.'}</span>
+                {/* <span className="text-sm font-semibold text-red-500">{error && 'Login failed! Please try again!'}</span> */}
+
                 <div className="form-control mt-6">
                   <button className="bg-gray-800 p-2 rounded text-white hover:bg-gray-900 transition-all">Login</button>
                   <div className="divider">OR</div>

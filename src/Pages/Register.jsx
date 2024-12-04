@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
  
 
 const Register = () => {
 
     const { registerUser } = useContext(authContext);
-
+    const navigate = useNavigate();
+    const [error, setError] = useState(false);
 
     const createUser = (e) => {
       e.preventDefault();
@@ -18,12 +19,21 @@ const Register = () => {
       const user = { name, email, photo, pass };
       console.log(user)
 
+      const passRegx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+      if(!passRegx.test(pass)){
+        setError(true);
+        return;
+      }
+      setError(false);
+
       registerUser(email, pass)
       .then(result => {
         console.log(result.user)
+        navigate('/');
       })
       .catch(error => {
         console.log(error.message)
+        setError(true)
       })
        
 
@@ -58,6 +68,9 @@ const Register = () => {
                   </label>
                   <input type="password" placeholder="password" name="pass" className="input input-bordered" required />
                 </div>
+
+                <span className="text-xs font-semibold text-red-500">{error && 'Password must be 6+ characters with at least one uppercase and one lowercase letter.'}</span>
+
                 <div className="form-control mt-6">
                   <button className="bg-gray-800 p-2 rounded text-white hover:bg-gray-900 transition-all">Register</button>
                 </div>

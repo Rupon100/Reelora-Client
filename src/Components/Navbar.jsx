@@ -1,14 +1,32 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../Context/AuthContext";
 
  
 
 const Navbar = () => {
+    const { user, logout } = useContext(authContext);
+  
+    console.log(user?.displayName);
 
     const links = <>
      <Link>Home</Link>
-     <Link>All Movies</Link>
+     <Link to='/allmovie'>All Movies</Link>
+     {
+      user ?  
+      <>
+        <Link to='/addmovie'>Add Movie</Link>
+        <Link to='/favmovie'>My Favorites</Link>
+      </> :
+      ''
+     }
      <Link to='/blog'>Blog</Link>
-    </>
+    </>;
+
+    const handleLogout = () => {
+      console.log('done');
+      logout();
+    }
 
     return (
         <div className="m-2 rounded">
@@ -46,8 +64,23 @@ const Navbar = () => {
               </div>
 
               <div className="navbar-end flex items-center gap-2">
-                <Link to='/login' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Login</Link>
-                <Link to='/register' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Register</Link>
+                {/* <Link to='/login' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Login</Link>
+                <Link to='/register' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Register</Link> */}
+                {
+                  user ?
+                  <>
+                    <button onClick={handleLogout} className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Logout</button>
+                    <div className="tooltip tooltip-left cursor-pointer" data-tip={user?.displayName}>
+                       <img 
+                       className="h-12 w-12 border rounded-full cursor-pointer" 
+                       src={user?.photoURL} alt="photo user" />
+                    </div>
+                  </> :
+                  <>
+                    <Link to='/login' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Login</Link>
+                    <Link to='/register' className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Register</Link>
+                  </> 
+                }
               </div>
             </div>
         </div>

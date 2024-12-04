@@ -5,6 +5,10 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Blog from "../Components/Blog";
 import MianSection from "../Components/MianSection";
+import AddMovie from "../Pages/AddMovie";
+import FavoriteMovie from "../Pages/FavoriteMovie";
+import Allmovie from "../Pages/Allmovie";
+import PrivateRoute from "../Provider/PrivateRoute";
 
  
 
@@ -24,6 +28,18 @@ const route = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/allmovie',
+                element: <Allmovie></Allmovie>
+            },
+            {
+                path: '/addmovie',
+                element: <PrivateRoute><AddMovie></AddMovie></PrivateRoute>
+            },
+            {
+                path: '/favmovie',
+                element: <PrivateRoute><FavoriteMovie></FavoriteMovie></PrivateRoute>
             },
             {
                 path: '/blog',
