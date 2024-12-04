@@ -3,7 +3,7 @@
 const Allmovie = () => {
     return (
         <div>
-            all movie here
+            <h1>All Movie</h1>
         </div>
     );
 };
