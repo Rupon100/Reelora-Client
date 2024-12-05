@@ -1,27 +1,15 @@
-import { useContext } from "react";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import {  Link, useLoaderData, useParams } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
 
 const Details = () => {
-    const loaded = useLoaderData();
-    const { _id, poster, title, genre, year, time, msg, rating } = loaded;
-    const { movies, setMovies } = useContext(authContext);
-    const navigate = useNavigate();
+    const { loading, setLoading, movies, setMovies } = useContext(authContext);
+    const [currestDetails, setCurrentDetails] = useState([]);
 
-    const handleDelete = (id) => {
-        fetch(`http://localhost:5000/allmovie/${id}`, {
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log('deleted movie is: ', data);
-            if(data.deletedCount > 0){
-                const remaining = movies.filter(movie => movie.id != id);
-                setMovies(remaining);
-                navigate('/allmovie');
-            }
-        })
-    }
+    const loaderData = useLoaderData();
+    const { email ,poster, title, genre, year, time, msg, rating } = loaderData;
+    console.log(poster, title, msg);
+
    
     return (
         <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-black to-gray-800 text-white">
@@ -42,9 +30,9 @@ const Details = () => {
                     <p>{msg}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                    <Link onClick={() => handleDelete(_id)} className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Delete Movie</Link>
-                    <Link className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Add to Favorite</Link>
-                    <Link className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Update</Link>
+                    <Link className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Delete Movie</Link>
+                    <button   className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Add to Favorite</button>
+                    <button className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Update</button>
                 </div>
             </div>
         </div>

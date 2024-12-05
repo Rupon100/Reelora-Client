@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 const Navbar = () => {
     const { user, logout } = useContext(authContext);
   
-    console.log(user?.displayName);
+    // console.log(user?.displayName);
 
     const links = <>
      <Link>Home</Link>

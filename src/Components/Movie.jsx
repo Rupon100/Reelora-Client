@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
 const Movie = ({ movie }) => {
     const { _id ,poster, title, genre, year, time, rating } = movie;
 
+    
 
     return (
         <div className="border rounded p-4 flex flex-col gap-3 text-white">
