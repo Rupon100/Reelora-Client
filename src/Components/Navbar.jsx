@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
-
- 
+import { ToastContainer } from 'react-toastify';
 
 const Navbar = () => {
     const { user, logout } = useContext(authContext);
@@ -30,6 +29,7 @@ const Navbar = () => {
 
     return (
         <div className="m-2 rounded">
+        <ToastContainer />
             <div className="navbar bg-gray-800 text-white rounded">
               <div className="navbar-start">
 
