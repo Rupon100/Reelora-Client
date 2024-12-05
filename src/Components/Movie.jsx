@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 
 
 const Movie = ({ movie }) => {
-    const { poster, title, genre, year, time, rating } = movie;
+    const { _id ,poster, title, genre, year, time, rating } = movie;
+
+
     return (
         <div className="border rounded p-4 flex flex-col gap-3 text-white">
             <div >
@@ -18,7 +20,7 @@ const Movie = ({ movie }) => {
               <h4>Rating: {rating}.0</h4>
             </div>
             <div>
-                <Link className="bg-white font-semibold text-black p-2 rounded hover:bg-gray-400 transition-all">See Details</Link>
+                <Link to={`/details/${_id}`} className="bg-white font-semibold text-black p-2 rounded hover:bg-gray-400 transition-all">See Details</Link>
             </div>
         </div>
     );

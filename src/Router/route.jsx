@@ -9,6 +9,7 @@ import AddMovie from "../Pages/AddMovie";
 import FavoriteMovie from "../Pages/FavoriteMovie";
 import Allmovie from "../Pages/Allmovie";
 import PrivateRoute from "../Provider/PrivateRoute";
+import Details from "../Components/Details";
 
  
 
@@ -40,6 +41,11 @@ const route = createBrowserRouter([
             {
                 path: '/favmovie',
                 element: <PrivateRoute><FavoriteMovie></FavoriteMovie></PrivateRoute>
+            },
+            {
+                path: '/details/:id',
+                element: <Details></Details>,
+                loader: ({params}) => fetch(`http://localhost:5000/details/${params.id}`)
             },
             {
                 path: '/blog',
