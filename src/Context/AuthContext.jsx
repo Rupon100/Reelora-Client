@@ -8,6 +8,7 @@ const AuthContext = ({ children }) => {
     
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState([]);
+    const [movies, setMovies] = useState([]);
      
     const registerUser = (email,pass) => {
         setLoading(true);
@@ -35,6 +36,8 @@ const AuthContext = ({ children }) => {
         setUser,
         loading, 
         setLoading,
+        movies,
+        setMovies,
         logout,
         registerUser,
         loginUser,

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Movie from "../Components/Movie";
+import { authContext } from "../Context/AuthContext";
 
  
 
 const Allmovie = () => {
-    const [movies, setMovies] = useState([]);
+    // const [movies, setMovies] = useState([]);
+    const {movies, setMovies} = useContext(authContext);
 
     useEffect(() => {
         fetch('http://localhost:5000')

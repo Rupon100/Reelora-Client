@@ -1,11 +1,26 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { authContext } from "../Context/AuthContext";
 
 const Details = () => {
     const loaded = useLoaderData();
     const { _id, poster, title, genre, year, time, msg, rating } = loaded;
+    const { movies, setMovies } = useContext(authContext);
+    const navigate = useNavigate();
 
     const handleDelete = (id) => {
-        
+        fetch(`http://localhost:5000/allmovie/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('deleted movie is: ', data);
+            if(data.deletedCount > 0){
+                const remaining = movies.filter(movie => movie.id != id);
+                setMovies(remaining);
+                navigate('/allmovie');
+            }
+        })
     }
    
     return (
@@ -27,7 +42,7 @@ const Details = () => {
                     <p>{msg}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                    <Link to='/allmovie' onClick={() => handleDelete(_id)} className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Delete Movie</Link>
+                    <Link onClick={() => handleDelete(_id)} className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Delete Movie</Link>
                     <Link className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Add to Favorite</Link>
                     <Link className="p-2 rounded bg-white text-black hover:bg-gray-900 hover:text-white font-semibold">Update</Link>
                 </div>
