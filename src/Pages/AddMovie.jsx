@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Rating } from 'react-simple-star-rating' 
-// import { type } from './../../node_modules/react-spinners/cjs/helpers/props.d';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
+import { authContext } from '../Context/AuthContext';
 
 const AddMovie = () => {
 
+    const { user } = useContext(authContext);
     const [rating, setRating] = useState(0);
     const [genre, setGenre] = useState('');
     const [year, setYear] = useState('');
@@ -15,19 +16,16 @@ const AddMovie = () => {
 
     const handleRating = (rate) => {
         setRating(rate);
-        // return;
     }
 
     const handleGenre = (e) => {
       const selectedGenre = e.target.value;
-      setGenre(selectedGenre);
-      // return;
+      setGenre(selectedGenre); 
     }
 
     const handleYear = (e) => {
       const selectedYear = e.target.value;
-      setYear(selectedYear);
-      // return;
+      setYear(selectedYear); 
     }
 
     
@@ -35,12 +33,12 @@ const AddMovie = () => {
       e.preventDefault();
       errorMessages = [];
       valid = true;
-
+      const email = user?.email;
       const form = e.target;
-      const poster = form.poster.value; //check for link
-      const title = form.title.value; //min 2 char
-      const time = Number(form.time.value); //must not empty grater then 60 as minitues input
-      const msg = form.msg.value; //min 10 char
+      const poster = form.poster.value; 
+      const title = form.title.value; 
+      const time = Number(form.time.value); 
+      const msg = form.msg.value;  
 
       const urlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
       if(!urlRegex.test(poster)){
@@ -95,8 +93,22 @@ const AddMovie = () => {
         }));
           return
       }else{
-        const newMovie = { poster, title, genre, year, time, msg, rating };
+        const newMovie = { email ,poster, title, genre, year, time, msg, rating };
         console.log("Movie added successfully",newMovie);
+
+        fetch(`http://localhost:5000/addmovie`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newMovie)
+        })
+        .then(res => res.json())
+        .then(data => {
+           if(data.insertedId){
+            console.log('added in the DB')
+           }
+        })
         
 
         toast.success('Successfully added!', {
