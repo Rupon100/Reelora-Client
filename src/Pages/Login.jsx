@@ -5,7 +5,7 @@ import { authContext } from "../Context/AuthContext";
 
 const Login = () => {
 
-    const { setUser, loginUser, googleLogin } = useContext(authContext);
+    const { setUser, loginUser, googleLogin,  } = useContext(authContext);
     const [error, setError] = useState(false);
 
     const navigate = useNavigate();
@@ -15,8 +15,6 @@ const Login = () => {
         const form = e.target;
         const email =form.email.value;
         const pass =form.pass.value;
-        const user = { email,pass };
-        console.log(user);
 
         const passRegx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if(!passRegx.test(pass)){
@@ -24,29 +22,28 @@ const Login = () => {
           return;
         }
         setError(false);
-
         loginUser(email, pass)
         .then(result => {
-          console.log(result.user);
+         
           setUser(result.user);
-          navigate('/')
+          navigate('/');
         })
         .catch(error => {
           setError(true)
-          console.log(error.message)
+        
         })
     }
 
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-          console.log(result.user);
+         
           setUser(result.user);
           navigate('/')
         })
         .catch(error => {
           setError(true)
-          console.log(error.message)
+         
         })
     }
 

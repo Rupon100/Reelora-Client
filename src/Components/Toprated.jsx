@@ -1,12 +1,15 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../Context/AuthContext";
 
  
 
 const Toprated = ({ movie }) => {
     const { _id ,poster, title, genre, year, time, rating } = movie;
+    const { isLight } = useContext(authContext);
     
     return (
-        <div className="max-w-[300px] border rounded p-4 flex flex-col gap-3 text-white">
+        <div className={`max-w-[300px] border rounded p-4 flex flex-col gap-3 ${isLight ?  'text-white' : 'text-black border-black bg-gray-400'} `}>
             <div >
               <img className="min-h-[200px] w-full object-cover" src={poster} alt="poster" />
             </div>

@@ -18,7 +18,7 @@ const Register = () => {
       const photo =form.photo.value;
       const pass =form.pass.value;
       const user = { name, email, photo, pass };
-      console.log(user)
+      
 
       const passRegx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
       if(!passRegx.test(pass)){
@@ -29,11 +29,11 @@ const Register = () => {
 
       registerUser(email, pass)
       .then(result => {
-        console.log(result.user)
+       
         navigate('/');
       })
       .catch(error => {
-        console.log(error.message)
+      
         setError(true)
       })     
 
@@ -42,13 +42,13 @@ const Register = () => {
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-          console.log(result.user);
+          
           setUser(result.user);
           navigate('/')
         })
         .catch(error => {
           setError(true)
-          console.log(error.message)
+          
         })
     }
 

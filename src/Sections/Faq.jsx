@@ -1,8 +1,11 @@
+import { useContext } from "react";
+import { authContext } from "../Context/AuthContext";
 
 const Faq = () => {
+     const { isLight } = useContext(authContext);
     return (
         <div className="my-4 md:my-8 py-4 md:py-8 space-y-3 flex flex-col items-center gap-2">
-            <h1 className="font-semibold text-2xl md:text-4xl text-white">Frequently Asked Questions</h1>
+            <h1 className={`font-semibold text-2xl md:text-4xl ${isLight ? 'text-white' : 'text-black'}`}>Frequently Asked Questions</h1>
             <div className="max-w-4xl mx-auto space-y-2">
                 <div className="collapse collapse-arrow bg-base-200">
                   <input type="radio" name="my-accordion-2" defaultChecked />

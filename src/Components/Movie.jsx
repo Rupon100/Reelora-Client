@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../Context/AuthContext";
 
 
 const Movie = ({ movie }) => {
     const { _id ,poster, title, genre, year, time, rating } = movie;
-
-    
+    const { isLight } = useContext(authContext);
 
     return (
-        <div className="border max-h-[600px] rounded p-4 flex flex-col gap-3 text-white">
+        <div className={`border max-h-[600px] rounded p-4 flex flex-col gap-3 ${isLight ? 'text-white' : 'text-black border-gray-700'}`}>
             <div >
               <img className="min-h-[200px] w-full object-cover" src={poster} alt="poster" />
             </div>
@@ -22,7 +22,7 @@ const Movie = ({ movie }) => {
               <h4>Rating: {rating}.0</h4>
             </div>
             <div>
-                <Link to={`/details/${_id}`} className="bg-white font-semibold text-black p-2 rounded hover:bg-gray-400 transition-all">See Details</Link>
+                <Link to={`/details/${_id}`} className="bg-white font-semibold border border-gray-400 text-black p-2 rounded hover:bg-gray-400 transition-all">See Details</Link>
             </div>
         </div>
     );

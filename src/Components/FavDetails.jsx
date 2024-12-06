@@ -5,28 +5,26 @@ import { authContext } from "../Context/AuthContext";
  
 
 const FavDetails = ({ favMovie }) => {
-    const { favmovie, setFavmovie } = useContext(authContext);
-    const { _id ,poster, title, genre, year, time, rating } = favMovie;
+    const { favmovie, setFavmovie, isLight } = useContext(authContext);
+    const { _id, poster, title, genre, year, time, rating } = favMovie;
 
     const handleDelete = (id) => {
-        console.log(id)
         fetch(`http://localhost:5000/favmovie/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             const remaining = favmovie.filter(movie => movie._id != id);
             setFavmovie(remaining);
         })
     }
 
     return (
-        <div className="border max-h-[600px] rounded p-4 flex flex-col gap-3 text-white">
+        <div className={`border max-h-[600px] rounded p-4 flex flex-col gap-3 ${isLight ? 'text-white' : 'text-black border-black'} text-white`}>
             <div >
-              <img className="min-h-[200px] w-full object-cover" src={poster} alt="poster" />
+              <img className="h-[200px] w-full object-cover" src={poster} alt="poster" />
             </div>
-            <div className="flex-grow space-y-2">
+            <div className={` flex-grow space-y-2  ${isLight ? 'text-white' : 'text-black'} `}>
               <h2 className="text-lg font-semibold md:text-xl">{title}</h2>
               <div className="flex items-center flex-wrap gap-2">
                 <p className="font-semibold">{genre}</p>
@@ -36,7 +34,7 @@ const FavDetails = ({ favMovie }) => {
               <h4>Rating: {rating}.0</h4>
             </div>
             <div>
-                <button onClick={() => handleDelete(_id)} className="bg-white font-semibold text-black p-2 rounded hover:bg-gray-400 transition-all">Delete</button>
+                <button onClick={() => handleDelete(_id)} className="bg-white font-semibold border border-gray-400 text-black p-2 rounded hover:bg-gray-400 transition-all">Delete</button>
             </div>
         </div>
     );

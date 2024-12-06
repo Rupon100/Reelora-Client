@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { authContext } from "../Context/AuthContext";
 
 const Blog = () => {
+    const { isLight } = useContext(authContext);
     return (
-        <div className="bg-gradient-to-r from-black to-gray-800 min-h-screen">
+        <div className={`${isLight ? 'bg-gradient-to-r from-black to-gray-800' : 'bg-white'} min-h-screen`}>
             <div className="p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-4 rounded hover:bg-slate-500 transition-all hover:cursor-pointer space-y-2 text-white">
                     <h2 className="font-bold text-2xl mb-2">Deadpool 2</h2>

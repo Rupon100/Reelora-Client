@@ -1,10 +1,13 @@
+import { useContext } from "react";
+import { authContext } from "../Context/AuthContext";
 
 const Subscription = () => {
+    const { isLight } = useContext(authContext);
     return (
         <div className="my-4 md:my-8 py-4 md:py-8 space-y-3 md:space-y-6 text-center">
-            <div className="space-y-4">
-                <h1 className="font-semibold text-2xl md:text-4xl text-white">Subscription</h1>
-                <p className="text-white">Unlock ad-free access to a vast library of movies and shows. Enjoy HD/4K streaming, offline downloads, and multi-device support. Choose from Basic, Standard, or Premium plans to suit your needs. Start your free trial today!</p>
+            <div className={`space-y-4`}>
+                <h1 className={`font-semibold text-2xl md:text-4xl ${isLight ? 'text-white' : 'text-black'}`}>Subscription</h1>
+                <p className={`${isLight ? 'text-white' : 'text-black'}`}>Unlock ad-free access to a vast library of movies and shows. Enjoy HD/4K streaming, offline downloads, and multi-device support. Choose from Basic, Standard, or Premium plans to suit your needs. Start your free trial today!</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-4">
                 <div className="p-2 bg-gray-300 rounded md:p-4 flex flex-col items-center gap-4 cursor-pointer">

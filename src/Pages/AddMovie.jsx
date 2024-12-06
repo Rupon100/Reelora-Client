@@ -97,7 +97,6 @@ const AddMovie = () => {
           return
       }else{
         const newMovie = { email ,poster, title, genre, year, time, msg, rating };
-        console.log("Movie added successfully",newMovie);
 
         fetch(`http://localhost:5000/addmovie`, {
           method: 'POST',
@@ -109,11 +108,9 @@ const AddMovie = () => {
         .then(res => res.json())
         .then(data => {
            if(data.insertedId){
-            console.log('added in the DB')
+            console.log('done')
            }
         })
-        
-
         toast.success('Successfully added!', {
           position: "top-right",
           autoClose: 2000,
@@ -125,15 +122,13 @@ const AddMovie = () => {
           theme: "light",
           transition: Bounce,
           });
-
       }
-
     }
     
 
     return (
       <div className='max-w-5xl mx-auto'>
-        <div className="min-h-screen m-2 md:m-4 ">
+        <div className="min-h-screen m-2 md:m-4">
             <h1 className="font-semibold text-2xl md:text-4xl text-center md:my-4">Add a movie</h1>
             <div>
                 <form onSubmit={addMovie} className="card-body w-full space-y-4 md:space-y-6">
@@ -186,6 +181,11 @@ const AddMovie = () => {
                          <option>2022</option>
                          <option>2021</option>
                          <option>2020</option>
+                         <option>2019</option>
+                         <option>2018</option>
+                         <option>2018</option>
+                         <option>2017</option>
+                         <option>2016</option>
                        </select>
                     </div>
                     <div className="w-1/2">
