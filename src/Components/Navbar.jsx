@@ -28,7 +28,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className="m-2 rounded">
+        <div className="m-2  rounded">
         <ToastContainer />
             <div className="navbar bg-gray-800 text-white rounded">
               <div className="navbar-start">

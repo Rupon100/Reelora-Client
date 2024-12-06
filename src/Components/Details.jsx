@@ -42,7 +42,7 @@ const Details = () => {
    
     return (
         <div className="min-h-screen flex justify-center bg-gradient-to-r from-black to-gray-800 text-white">
-            <div className="m-4 p-2 md:p-4 space-y-4 md:space-y-8 max-w-5xl mx-auto">
+            <div className="m-4 p-4 space-y-8 max-w-5xl mx-auto">
                 <div>
                     <img className="rounded max-h-[600px] w-full object-cover" src={poster} alt="poster" />
                 </div>

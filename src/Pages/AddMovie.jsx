@@ -163,6 +163,8 @@ const AddMovie = () => {
                           <option>Horror</option>
                           <option>Action</option>
                           <option>Romantic</option>
+                          <option>Thriller</option>
+                          <option>Fanticy</option>
                         </select>
                     </div>
                     <div className="form-control w-full md:w-1/2">
