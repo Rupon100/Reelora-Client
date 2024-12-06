@@ -40,7 +40,10 @@ const AddMovie = () => {
       const time = Number(form.time.value); 
       const msg = form.msg.value;  
 
-      const urlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+      // const urlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+      // const urlRegex = /^(https?:\/\/[\w.-]+\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+
+      const urlRegex = /^(https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?\.(?:png|jpg|jpeg|gif|svg|webp)$/i;
       if(!urlRegex.test(poster)){
         errorMessages.push('Enter a valid URL!');
         valid = false;
@@ -129,7 +132,8 @@ const AddMovie = () => {
     
 
     return (
-        <div className="min-h-screen m-2 md:m-4">
+      <div className='max-w-5xl mx-auto'>
+        <div className="min-h-screen m-2 md:m-4 ">
             <h1 className="font-semibold text-2xl md:text-4xl text-center md:my-4">Add a movie</h1>
             <div>
                 <form onSubmit={addMovie} className="card-body w-full space-y-4 md:space-y-6">
@@ -157,6 +161,8 @@ const AddMovie = () => {
                           <option>Comedy</option>
                           <option>Drama</option>
                           <option>Horror</option>
+                          <option>Action</option>
+                          <option>Romantic</option>
                         </select>
                     </div>
                     <div className="form-control w-full md:w-1/2">
@@ -194,6 +200,7 @@ const AddMovie = () => {
                 </form>
             </div>
         </div>
+      </div>  
     );
 };
 

@@ -8,7 +8,7 @@ const Movie = ({ movie }) => {
     
 
     return (
-        <div className="border rounded p-4 flex flex-col gap-3 text-white">
+        <div className="border max-h-[600px] rounded p-4 flex flex-col gap-3 text-white">
             <div >
               <img className="min-h-[200px] w-full object-cover" src={poster} alt="poster" />
             </div>
