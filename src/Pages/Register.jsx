@@ -29,11 +29,9 @@ const Register = () => {
 
       registerUser(email, pass)
       .then(result => {
-       
         navigate('/');
       })
       .catch(error => {
-      
         setError(true)
       })     
 
@@ -42,7 +40,6 @@ const Register = () => {
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-          
           setUser(result.user);
           navigate('/')
         })

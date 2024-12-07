@@ -11,6 +11,7 @@ const AuthContext = ({ children }) => {
     const [movies, setMovies] = useState([]);
     const [favmovie, setFavmovie] = useState([]);
     const [isLight, setisLight] = useState([]);
+    const [genre, setGenre] = useState([]);
      
     const registerUser = (email,pass) => {
         setLoading(true);
@@ -36,6 +37,8 @@ const AuthContext = ({ children }) => {
     const info = {
         isLight,
         setisLight,
+        genre,
+        setGenre,
         user,
         setUser,
         loading, 

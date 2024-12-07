@@ -24,8 +24,21 @@ const Feature = () => {
             <div className={`carousel carousel-center ${isLight ? 'bg-gray-800' : 'bg-gray-500'} rounded-box space-x-4 p-2 md:p-4`}>
                 <div className="carousel-item space-x-4 py-2 px-4">
                     {
-                      featured.map((item, i) => <Toprated key={i} movie={item}></Toprated>)
+                        featured.length === 0 ? (
+                            <div>
+                                <h2 className={`font-semibold text-2xl md:text-4xl  ${isLight ? 'text-white' : 'text-black'} `}>NO Featured Data!</h2>
+                            </div>
+                        ) : (
+                            <div className="carousel-item space-x-4 py-2 px-4">
+                                {
+                                  featured.map((item, i) => <Toprated key={i} movie={item}></Toprated>)
+                                }
+                            </div>
+                        )
                     }
+                    {/* {
+                      featured.map((item, i) => <Toprated key={i} movie={item}></Toprated>)
+                    } */}
                 </div>
             </div>
             <Link className="p-1 font-semibold bg-white rounded self-start text-sm border border-gray-400" to='/allmovie'>See All Movies</Link>

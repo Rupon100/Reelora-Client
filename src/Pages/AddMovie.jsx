@@ -4,24 +4,40 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
 import { authContext } from '../Context/AuthContext';
+import Select from 'react-select';
 
 const AddMovie = () => {
-
-    const { user } = useContext(authContext);
+    const { user, isLight, genre, setGenre } = useContext(authContext);
     const [rating, setRating] = useState(0);
-    const [genre, setGenre] = useState('');
+    // const [genre, setGenre] = useState([]);
     const [year, setYear] = useState('');
     let errorMessages = [];
     let valid = true;
+    
+
+    const genreOptions = [
+      { value: 'Comedy', label: 'Comedy' },
+      { value: 'Drama', label: 'Drama' },
+      { value: 'Horror', label: 'Horror' },
+      { value: 'Action', label: 'Action' },
+      { value: 'Romantic', label: 'Romantic' },
+      { value: 'Thriller', label: 'Thriller' },
+      { value: 'Fantasy', label: 'Fantasy' },
+    ];
 
     const handleRating = (rate) => {
         setRating(rate);
     }
 
-    const handleGenre = (e) => {
-      const selectedGenre = e.target.value;
-      setGenre(selectedGenre); 
-    }
+    // const handleGenre = (e) => {
+    //   const selectedGenre = e.target.value;
+    //   setGenre(selectedGenre); 
+    // }
+
+    // const handleGenre = (e) => {
+    //   const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+    //   setGenre(selectedOptions);
+    // };
 
     const handleYear = (e) => {
       const selectedYear = e.target.value;
@@ -42,6 +58,7 @@ const AddMovie = () => {
 
       // const urlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
       // const urlRegex = /^(https?:\/\/[\w.-]+\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+      // const urlRegex = /^(https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?\.(?:png|jpg|jpeg|gif|svg|webp)$/i;
 
       const urlRegex = /^(https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?\.(?:png|jpg|jpeg|gif|svg|webp)$/i;
       if(!urlRegex.test(poster)){
@@ -127,6 +144,7 @@ const AddMovie = () => {
     
 
     return (
+      <div>
       <div className='max-w-5xl mx-auto'>
         <div className="min-h-screen m-2 md:m-4">
             <h1 className="font-semibold text-2xl md:text-4xl text-center md:my-4">Add a movie</h1>
@@ -151,8 +169,8 @@ const AddMovie = () => {
                         <label className="label">
                            <span className="label-text">Genre type</span>
                         </label>
-                        <select onChange={handleGenre} value={genre} name='genre' className="select select-bordered w-full">
-                          <option disabled selected value={''}>select one</option>
+                        {/* <select onChange={handleGenre} value={genre} name='genre' className="select select-bordered w-full">
+                          <option disabled selected value={''}>select Genre</option>
                           <option>Comedy</option>
                           <option>Drama</option>
                           <option>Horror</option>
@@ -160,7 +178,36 @@ const AddMovie = () => {
                           <option>Romantic</option>
                           <option>Thriller</option>
                           <option>Fanticy</option>
-                        </select>
+                        </select> */}
+
+
+                        {/* <select
+                          multiple
+                          onChange={handleGenre}
+                          value={genre} // `genre` should be an array to handle multiple selections
+                          name='genre'
+                          className="select select-bordered w-full h-32 p-2" // Add height and padding for better display
+                        >
+                          <option disabled value={''}>Select one or more</option>
+                          <option value="Comedy">Comedy</option>
+                          <option value="Drama">Drama</option>
+                          <option value="Horror">Horror</option>
+                          <option value="Action">Action</option>
+                          <option value="Romantic">Romantic</option>
+                          <option value="Thriller">Thriller</option>
+                          <option value="Fantasy">Fantasy</option>
+                        </select> */}
+
+
+                        <Select
+                          isMulti
+                          options={genreOptions}
+                          onChange={(selected) => setGenre(selected.map(option => option.value))}
+                          className="basic-multi-select"
+                          classNamePrefix="select"
+                        />
+
+
                     </div>
                     <div className="form-control w-full md:w-1/2">
                       <label className="label">
@@ -195,14 +242,15 @@ const AddMovie = () => {
                       <Rating onClick={handleRating} className='' />
                     </div>
                   </div>
-                  <div className='w-full border'>
-                    <textarea name="msg" className="resize-none w-full p-4 md:p-10" placeholder="Give a summery"></textarea>
+                  <div className='w-full'>
+                    <textarea name="msg" className="resize-none border w-full rounded md:p-10" placeholder="Give a summery"></textarea>
                   </div>
                   <button type='submit' className='btn btn-block font-semibold'>Add</button>
                 </form>
             </div>
         </div>
       </div>  
+      </div>
     );
 };
 

@@ -24,7 +24,6 @@ const Login = () => {
         setError(false);
         loginUser(email, pass)
         .then(result => {
-         
           setUser(result.user);
           navigate('/');
         })
@@ -37,7 +36,6 @@ const Login = () => {
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-         
           setUser(result.user);
           navigate('/')
         })

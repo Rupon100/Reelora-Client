@@ -11,7 +11,7 @@ const Toprated = ({ movie }) => {
     return (
         <div className={`max-w-[300px] border rounded p-4 flex flex-col gap-3 ${isLight ?  'text-white' : 'text-black border-black bg-gray-400'} `}>
             <div >
-              <img className="min-h-[200px] w-full object-cover" src={poster} alt="poster" />
+              <img className="h-[200px] w-full object-cover" src={poster} alt="poster" />
             </div>
             <div className="flex-grow space-y-2">
               <h2 className="text-lg font-semibold md:text-xl">{title}</h2>

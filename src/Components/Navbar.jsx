@@ -29,6 +29,7 @@ const Navbar = () => {
       setisLight(!isLight)
     };
     
+     
 
     return (
         <div className={`p-2 ${isLight ? 'bg-gray-700' : 'bg-white'}`}>
@@ -89,7 +90,7 @@ const Navbar = () => {
                   user ?
                   <>
                     <button onClick={handleLogout} className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Logout</button>
-                    <div className="tooltip tooltip-left cursor-pointer" data-tip={user?.displayName}>
+                    <div className="tooltip tooltip-left cursor-pointer" data-tip={user?.displayName || user?.email}>
                        <img 
                        className="h-12 w-12 border rounded-full cursor-pointer" 
                        src={user?.photoURL} alt="photo user" />
