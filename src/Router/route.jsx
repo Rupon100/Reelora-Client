@@ -43,18 +43,18 @@ const route = createBrowserRouter([
             {
                 path: '/favmovie',
                 element: <PrivateRoute><FavoriteMovie></FavoriteMovie></PrivateRoute>,
-                // loader: ({ params }) => fetch(`http://localhost:5000/favmovie/${params.email}`)
+                // loader: ({ params }) => fetch(`https://movie-server-gray.vercel.app/favmovie/${params.email}`)
             },
 
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+                loader: ({ params }) => fetch(`https://movie-server-gray.vercel.app/details/${params.id}`)
             },
             {
                 path: '/update/:id',
                 element: <PrivateRoute><UpdateDetails></UpdateDetails></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/update/${params.id}`)
+                loader: ({params}) => fetch(`https://movie-server-gray.vercel.app/update/${params.id}`)
             },
             {
                 path: '/blog',

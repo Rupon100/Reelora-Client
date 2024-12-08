@@ -9,7 +9,7 @@ const Feature = () => {
     const [featured, setFeatured] = useState([]);
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000/')
+        fetch('https://movie-server-gray.vercel.app/')
         .then(res => res.json())
         .then(data => {
            const topMovies = data.sort((a,b) => b.rating - a.rating).slice(0, 6);

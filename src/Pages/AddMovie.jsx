@@ -104,7 +104,7 @@ const AddMovie = () => {
           return
       }else{
         const newMovie = { email:user.email ,poster, title, genre, year, time, msg, rating };
-        fetch(`http://localhost:5000/addmovie`, {
+        fetch(`https://movie-server-gray.vercel.app/addmovie`, {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

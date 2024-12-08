@@ -31,7 +31,7 @@ const Register = () => {
       .then(result => {
         const userData = { name, email, photo };
         
-        fetch('http://localhost:5000/users', {
+        fetch('https://movie-server-gray.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -66,7 +66,7 @@ const Register = () => {
           setUser(userData)
           navigate('/')
           
-          fetch('http://localhost:5000/users', {
+          fetch('https://movie-server-gray.vercel.app/users', {
             method: 'POST',
             headers: {
               'content-type': 'application/json'

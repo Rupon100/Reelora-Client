@@ -11,7 +11,7 @@ const Allmovie = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000')
+        fetch('https://movie-server-gray.vercel.app')
         .then(res => res.json())
         .then(data => {
             setMovies(data);

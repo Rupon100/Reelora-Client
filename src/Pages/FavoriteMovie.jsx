@@ -9,7 +9,7 @@ const FavoriteMovie = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/favmovie/${user.email}`)
+        fetch(`https://movie-server-gray.vercel.app/favmovie/${user.email}`)
         .then(res => res.json())
         .then(data => {
             setFavmovie(data)

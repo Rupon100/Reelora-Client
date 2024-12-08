@@ -25,7 +25,7 @@ const UpdateDetails = () => {
     } = useForm();
 
     useEffect(() => {
-        fetch(`http://localhost:5000`)
+        fetch(`https://movie-server-gray.vercel.app`)
         .then(res => res.json())
         .then(data => {
             const movie = data.find(item => item._id == id);
@@ -61,7 +61,7 @@ const UpdateDetails = () => {
           genre: data.genre.map((gen) => gen.value)
         };
     
-        fetch(`http://localhost:5000/update/${id}`, {
+        fetch(`https://movie-server-gray.vercel.app/update/${id}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'

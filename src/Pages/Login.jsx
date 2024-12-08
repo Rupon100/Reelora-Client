@@ -29,7 +29,7 @@ const Login = () => {
 
           const curEmail = result.user.email;
 
-          fetch(`http://localhost:5000/users`)
+          fetch(`https://movie-server-gray.vercel.app/users`)
           .then(res => res.json())
           .then(result => {
             const currentUser = result.find(user => user.email === curEmail);
@@ -55,7 +55,7 @@ const Login = () => {
 
           setUser(newGoogleUser)
 
-          fetch('http://localhost:5000/users', {
+          fetch('https://movie-server-gray.vercel.app/users', {
             method: 'POST',
             headers: {
               'content-type': 'application/json'

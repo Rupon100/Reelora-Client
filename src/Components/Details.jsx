@@ -27,7 +27,7 @@ const Details = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/favmovie')
+        fetch('https://movie-server-gray.vercel.app/favmovie')
         .then(res => res.json())
         .then(data => {
             setNewFav(data);
@@ -35,7 +35,7 @@ const Details = () => {
     } ,[])
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/allmovie/${id}`, {
+        fetch(`https://movie-server-gray.vercel.app/allmovie/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -76,7 +76,7 @@ const Details = () => {
                 return
         } else {
 
-        fetch(`http://localhost:5000/favmovie`, {
+        fetch(`https://movie-server-gray.vercel.app/favmovie`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

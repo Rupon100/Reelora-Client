@@ -10,7 +10,7 @@ const FavDetails = ({ favMovie }) => {
     const { _id, poster, title, genre, year, time, rating } = favMovie;
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/favmovie/${id}`, {
+        fetch(`https://movie-server-gray.vercel.app/favmovie/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
