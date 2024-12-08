@@ -9,16 +9,16 @@ const FavoriteMovie = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000/favmovie')
+        fetch(`http://localhost:5000/favmovie/${user.email}`)
         .then(res => res.json())
         .then(data => {
-            const favFilter = data.filter(item => item.email === user.email);
-            setFavmovie(favFilter);
+            setFavmovie(data)
         })
         .finally(() => {
             setLoading(false)
         })
-    } ,[user, setLoading])
+    }, [user.email, setLoading])
+
 
     return (
         <div className={`p-2 md:p-4 min-h-screen ${isLight ? 'bg-gradient-to-r from-black to-gray-800' : 'white' } `}>
@@ -29,7 +29,9 @@ const FavoriteMovie = () => {
                 {
                     favmovie.length > 0 &&  (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-                            {favmovie.map((movie, i) => <FavDetails key={i} favMovie={movie} />)}
+                            {
+                                favmovie.map((movie, i) => <FavDetails key={i} favMovie={movie} />)
+                            }
                         </div>
                     )
                 }

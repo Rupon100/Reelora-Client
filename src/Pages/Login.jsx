@@ -32,10 +32,8 @@ const Login = () => {
           fetch(`http://localhost:5000/users`)
           .then(res => res.json())
           .then(result => {
-            console.log(result);
             const currentUser = result.find(user => user.email === curEmail);
             setUser(currentUser);
-            console.log(currentUser)
           })
           setLogedUser(email);
           navigate('/');
@@ -54,8 +52,6 @@ const Login = () => {
             email: result.user.email, 
             photo: result.user.photoURL
           };
-          console.log(newGoogleUser);
-      
 
           setUser(newGoogleUser)
 
@@ -68,7 +64,7 @@ const Login = () => {
           })
           .then(res => res.json())
           .then(data => {
-             console.log(newGoogleUser)
+            //  console.log(newGoogleUser)
           })
           navigate('/')
         })

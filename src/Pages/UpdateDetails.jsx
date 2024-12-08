@@ -14,7 +14,7 @@ const UpdateDetails = () => {
     const {id} = useParams();
     
     const { title, genre, msg, poster, rating, time, year } = currentMovie;
-    console.log(title)
+   
 
     const {
         register,
@@ -70,7 +70,6 @@ const UpdateDetails = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
           if(data.modifiedCount > 0){
             toast.success('Updated!', {
                 position: "top-right",

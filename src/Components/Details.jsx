@@ -12,7 +12,6 @@ const Details = () => {
     const { _id, email , poster, title, year, genre, msg, time, rating } = loaderData;
 
     const favAdd = {
-        _id: _id,
         email: user.email,
         poster: poster,
         title: title,
@@ -26,7 +25,6 @@ const Details = () => {
     const [newFav, setNewFav] = useState([]);
     const genres = Array.isArray(genre) ? genre : [genre];
 
-    console.log(newFav)
 
     useEffect(() => {
         fetch('http://localhost:5000/favmovie')
@@ -42,7 +40,6 @@ const Details = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             const remaining = favmovie.filter(movie => movie._id != id);
             if(data.deletedCount > 0){
                 setMovies(remaining)
@@ -64,7 +61,6 @@ const Details = () => {
     
     const handleFavmovie = (id) => {
         const isAlreadyFav = newFav.some(item => item._id == id);
-        console.log(isAlreadyFav);
         if(isAlreadyFav){
             toast.error('Already added!', {
                 position: "top-right",
@@ -89,7 +85,7 @@ const Details = () => {
         })
         .then(res => res.json())
         .then(data => {
-            setNewFav(prev => [...prev, loaderData]);
+            setNewFav(prev => [...prev, favAdd]);
             if(data.insertedId){
                 toast.success('Added to favorite', {
                 position: "top-right",
@@ -107,7 +103,7 @@ const Details = () => {
         return
     }
     }
-
+   
 
     return (
         <div className={`min-h-screen flex justify-center ${isLight ? 'bg-gradient-to-r from-black to-gray-800 ' : 'bg-white'}  text-white`}>

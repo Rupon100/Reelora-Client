@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
 import { toast,Bounce } from 'react-toastify';
@@ -16,9 +16,11 @@ const FavDetails = ({ favMovie }) => {
         .then(res => res.json())
         .then(data => {
             if(data.deletedCount > 0) {
+
                const remaining = favmovie.filter(movie => movie._id != id);
+
                setFavmovie(remaining);
-               console.log(data);
+              
                toast.success('Deleted', {
                 position: "top-right",
                 autoClose: 2000,

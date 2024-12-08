@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 const Navbar = () => {
     const { user, logout, isLight, setisLight, logedUser, setLogedUser } = useContext(authContext);
   
-    console.log(user)
 
     const links = <>
      <NavLink className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}  to='/'>Home</NavLink>
@@ -22,7 +21,6 @@ const Navbar = () => {
      <NavLink to='/blog' className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}>Blog</NavLink>
     </>;
 
-    // console.log(user.name)
 
     const handleLogout = () => {
       setLogedUser(null);

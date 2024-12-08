@@ -64,8 +64,6 @@ const Register = () => {
           };
 
           setUser(userData)
-          console.log(userData)
-
           navigate('/')
           
           fetch('http://localhost:5000/users', {

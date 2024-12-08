@@ -13,7 +13,6 @@ const AddMovie = () => {
     let errorMessages = [];
     let valid = true;
     
-    console.log(user.email)
     
     useEffect(() => {
       setGenre([]);  
@@ -45,7 +44,6 @@ const AddMovie = () => {
       errorMessages = [];
       valid = true;
       const email = user?.email;
-      console.log(email)
       const form = e.target;
       const poster = form.poster.value; 
       const title = form.title.value; 
@@ -106,7 +104,6 @@ const AddMovie = () => {
           return
       }else{
         const newMovie = { email:user.email ,poster, title, genre, year, time, msg, rating };
-        console.log(email)
         fetch(`http://localhost:5000/addmovie`, {
           method: 'POST',
           headers: {
@@ -117,7 +114,7 @@ const AddMovie = () => {
         .then(res => res.json())
         .then(data => {
            if(data.insertedId){
-            console.log('done')
+            // console.log('add')
            }
         })
         toast.success('Successfully added!', {
