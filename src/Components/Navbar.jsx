@@ -1,27 +1,31 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
 import { ToastContainer } from 'react-toastify';
 
 const Navbar = () => {
-    const { user, logout, isLight, setisLight } = useContext(authContext);
+    const { user, logout, isLight, setisLight, logedUser, setLogedUser } = useContext(authContext);
   
+    console.log(user)
 
     const links = <>
-     <Link>Home</Link>
-     <Link to='/allmovie'>All Movies</Link>
+     <NavLink className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}  to='/'>Home</NavLink>
+     <NavLink to='/allmovie' className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}>All Movies</NavLink>
      {
       user ?  
       <>
-        <Link to='/addmovie'>Add Movie</Link>
-        <Link to='/favmovie'>My Favorites</Link>
+        <NavLink to='/favmovie' className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}>My Favorites</NavLink>
+        <NavLink to='/addmovie' className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}>Add Movie</NavLink>
       </> :
       ''
      }
-     <Link to='/blog'>Blog</Link>
+     <NavLink to='/blog' className={({ isActive }) => isActive ? 'underline underline-offset-2' : ''}>Blog</NavLink>
     </>;
 
+    // console.log(user.name)
+
     const handleLogout = () => {
+      setLogedUser(null);
       logout();
     }
 
@@ -90,10 +94,10 @@ const Navbar = () => {
                   user ?
                   <>
                     <button onClick={handleLogout} className="border p-2 rounded-lg hover:bg-white hover:text-black transition-all cursor-pointer">Logout</button>
-                    <div className="tooltip tooltip-left cursor-pointer" data-tip={user?.displayName || user?.email}>
+                    <div className="tooltip tooltip-left cursor-pointer" data-tip={user?.name || user?.displayName}>
                        <img 
                        className="h-12 w-12 border rounded-full cursor-pointer" 
-                       src={user?.photoURL} alt="photo user" />
+                       src={user?.photo || user.photoURL} alt="photo user" />
                     </div>
                   </> :
                   <>

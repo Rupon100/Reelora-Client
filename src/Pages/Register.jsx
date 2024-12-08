@@ -2,11 +2,13 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../Firebase/firebase.config";
  
 
 const Register = () => {
 
-    const { registerUser,googleLogin, setUser } = useContext(authContext);
+    const { registerUser,googleLogin, setUser, setLogedUser } = useContext(authContext);
     const navigate = useNavigate();
     const [error, setError] = useState(false);
 
@@ -17,9 +19,7 @@ const Register = () => {
       const email =form.email.value;
       const photo =form.photo.value;
       const pass =form.pass.value;
-      const user = { name, email, photo, pass };
       
-
       const passRegx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
       if(!passRegx.test(pass)){
         setError(true);
@@ -29,7 +29,23 @@ const Register = () => {
 
       registerUser(email, pass)
       .then(result => {
-        navigate('/');
+        const userData = { name, email, photo };
+        
+        fetch('http://localhost:5000/users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userData)
+        })
+        .then(res => res.json())
+        .then(data => {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+          })
+          setUser(userData)
+          navigate('/');
+        })
       })
       .catch(error => {
         setError(true)
@@ -40,8 +56,29 @@ const Register = () => {
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-          setUser(result.user);
+          const { displayName, email, photoURL } = result.user;
+          const userData = { 
+            name: displayName, 
+            email, 
+            photo: photoURL 
+          };
+
+          setUser(userData)
+          console.log(userData)
+
           navigate('/')
+          
+          fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+          })
+          .then(res => res.json())
+          .then(data => {
+          })
+
         })
         .catch(error => {
           setError(true)

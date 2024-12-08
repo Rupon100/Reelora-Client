@@ -5,9 +5,9 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 export const authContext = createContext(null)
 
 const AuthContext = ({ children }) => {
-    
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState([]);
+    const [logedUser, setLogedUser] = useState(null);
     const [movies, setMovies] = useState([]);
     const [favmovie, setFavmovie] = useState([]);
     const [isLight, setisLight] = useState([]);
@@ -35,6 +35,8 @@ const AuthContext = ({ children }) => {
     }
 
     const info = {
+        logedUser,
+        setLogedUser,
         isLight,
         setisLight,
         genre,

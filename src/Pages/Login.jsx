@@ -5,7 +5,7 @@ import { authContext } from "../Context/AuthContext";
 
 const Login = () => {
 
-    const { setUser, loginUser, googleLogin,  } = useContext(authContext);
+    const { setUser, loginUser, googleLogin, setLogedUser  } = useContext(authContext);
     const [error, setError] = useState(false);
 
     const navigate = useNavigate();
@@ -22,29 +22,60 @@ const Login = () => {
           return;
         }
         setError(false);
+
+
         loginUser(email, pass)
         .then(result => {
-          setUser(result.user);
+
+          const curEmail = result.user.email;
+
+          fetch(`http://localhost:5000/users`)
+          .then(res => res.json())
+          .then(result => {
+            console.log(result);
+            const currentUser = result.find(user => user.email === curEmail);
+            setUser(currentUser);
+            console.log(currentUser)
+          })
+          setLogedUser(email);
           navigate('/');
         })
         .catch(error => {
           setError(true)
-        
         })
+
     }
 
     const handleGoogle = () => {
       googleLogin()
         .then(result => {
-          setUser(result.user);
+          const newGoogleUser = {
+            name: result.user.displayName, 
+            email: result.user.email, 
+            photo: result.user.photoURL
+          };
+          console.log(newGoogleUser);
+      
+
+          setUser(newGoogleUser)
+
+          fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(newGoogleUser)
+          })
+          .then(res => res.json())
+          .then(data => {
+             console.log(newGoogleUser)
+          })
           navigate('/')
         })
         .catch(error => {
           setError(true)
-         
         })
     }
-
 
     return (
         <div className="min-h-screen flex justify-center flex-col gap-4 m-4 items-center">
@@ -68,8 +99,7 @@ const Login = () => {
                 </div>
 
                 <span className="text-xs font-semibold text-red-500">{error && 'Password must be 6+ characters with at least one uppercase and one lowercase letter.'}</span>
-                {/* <span className="text-sm font-semibold text-red-500">{error && 'Login failed! Please try again!'}</span> */}
-
+                
                 <div className="form-control mt-6">
                   <button className="bg-gray-800 p-2 rounded text-white hover:bg-gray-900 transition-all">Login</button>
                   <div className="divider">OR</div>

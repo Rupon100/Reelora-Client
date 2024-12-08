@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Rating } from 'react-simple-star-rating' 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,13 +7,17 @@ import { authContext } from '../Context/AuthContext';
 import Select from 'react-select';
 
 const AddMovie = () => {
-    const { user, isLight, genre, setGenre } = useContext(authContext);
+    const { user,  genre, setGenre } = useContext(authContext);
     const [rating, setRating] = useState(0);
-    // const [genre, setGenre] = useState([]);
     const [year, setYear] = useState('');
     let errorMessages = [];
     let valid = true;
     
+    console.log(user.email)
+    
+    useEffect(() => {
+      setGenre([]);  
+    }, []);
 
     const genreOptions = [
       { value: 'Comedy', label: 'Comedy' },
@@ -29,15 +33,6 @@ const AddMovie = () => {
         setRating(rate);
     }
 
-    // const handleGenre = (e) => {
-    //   const selectedGenre = e.target.value;
-    //   setGenre(selectedGenre); 
-    // }
-
-    // const handleGenre = (e) => {
-    //   const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-    //   setGenre(selectedOptions);
-    // };
 
     const handleYear = (e) => {
       const selectedYear = e.target.value;
@@ -50,15 +45,12 @@ const AddMovie = () => {
       errorMessages = [];
       valid = true;
       const email = user?.email;
+      console.log(email)
       const form = e.target;
       const poster = form.poster.value; 
       const title = form.title.value; 
       const time = Number(form.time.value); 
       const msg = form.msg.value;  
-
-      // const urlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
-      // const urlRegex = /^(https?:\/\/[\w.-]+\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
-      // const urlRegex = /^(https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?\.(?:png|jpg|jpeg|gif|svg|webp)$/i;
 
       const urlRegex = /^(https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?\.(?:png|jpg|jpeg|gif|svg|webp)$/i;
       if(!urlRegex.test(poster)){
@@ -87,8 +79,8 @@ const AddMovie = () => {
         valid = false;
       }
 
-      if(!genre){
-        errorMessages.push('select a Genre!');
+      if (!Array.isArray(genre) || genre.length === 0) {
+        errorMessages.push('Select a Genre!');
         valid = false;
       }
 
@@ -113,8 +105,8 @@ const AddMovie = () => {
         }));
           return
       }else{
-        const newMovie = { email ,poster, title, genre, year, time, msg, rating };
-
+        const newMovie = { email:user.email ,poster, title, genre, year, time, msg, rating };
+        console.log(email)
         fetch(`http://localhost:5000/addmovie`, {
           method: 'POST',
           headers: {
@@ -140,6 +132,7 @@ const AddMovie = () => {
           transition: Bounce,
           });
       }
+      setGenre([]);
     }
     
 
@@ -169,44 +162,23 @@ const AddMovie = () => {
                         <label className="label">
                            <span className="label-text">Genre type</span>
                         </label>
-                        {/* <select onChange={handleGenre} value={genre} name='genre' className="select select-bordered w-full">
-                          <option disabled selected value={''}>select Genre</option>
-                          <option>Comedy</option>
-                          <option>Drama</option>
-                          <option>Horror</option>
-                          <option>Action</option>
-                          <option>Romantic</option>
-                          <option>Thriller</option>
-                          <option>Fanticy</option>
-                        </select> */}
-
-
-                        {/* <select
-                          multiple
-                          onChange={handleGenre}
-                          value={genre} // `genre` should be an array to handle multiple selections
-                          name='genre'
-                          className="select select-bordered w-full h-32 p-2" // Add height and padding for better display
-                        >
-                          <option disabled value={''}>Select one or more</option>
-                          <option value="Comedy">Comedy</option>
-                          <option value="Drama">Drama</option>
-                          <option value="Horror">Horror</option>
-                          <option value="Action">Action</option>
-                          <option value="Romantic">Romantic</option>
-                          <option value="Thriller">Thriller</option>
-                          <option value="Fantasy">Fantasy</option>
-                        </select> */}
-
-
+                      
                         <Select
                           isMulti
                           options={genreOptions}
-                          onChange={(selected) => setGenre(selected.map(option => option.value))}
+                          onChange={(selected) => {
+                            const selGenres = selected ? selected.map(option => option.value) : [];
+                            setGenre(selGenres)
+                          }}
                           className="basic-multi-select"
                           classNamePrefix="select"
+                          styles={{
+                            control: (base) => ({
+                                ...base,
+                                padding: '5px',
+                            })
+                          }}
                         />
-
 
                     </div>
                     <div className="form-control w-full md:w-1/2">

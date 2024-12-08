@@ -4,7 +4,7 @@ const Loading = () => {
     return (
         <div className="min-h-screen flex justify-center items-center ">
             <PulseLoader
-              color="#261313"
+              color="#B0B0B0"
               cssOverride={{}}
               speedMultiplier={1}
             />

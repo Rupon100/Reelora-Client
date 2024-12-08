@@ -18,9 +18,9 @@ const Banner = () => {
               navigation={true}
               className=''
             >
-              <SwiperSlide><Slide1></Slide1></SwiperSlide>
-              <SwiperSlide><Slide2></Slide2></SwiperSlide>
               <SwiperSlide><Slide3></Slide3></SwiperSlide>
+              <SwiperSlide><Slide2></Slide2></SwiperSlide>
+              <SwiperSlide><Slide1></Slide1></SwiperSlide>
             </Swiper>
 
             <style>

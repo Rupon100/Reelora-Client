@@ -6,9 +6,7 @@ import { authContext } from "../Context/AuthContext";
 const Movie = ({ movie }) => {
     const { _id ,poster, title, genre, year, time, rating } = movie;
     const { isLight } = useContext(authContext);
-    console.log(genre);
     const genres = Array.isArray(genre) ? genre : [genre];
-
     return (
         <div className={`border max-h-[600px] rounded p-4 flex flex-col gap-3 ${isLight ? 'text-white' : 'text-black border-gray-700'}`}>
             <div >
@@ -21,7 +19,7 @@ const Movie = ({ movie }) => {
                           <span className="text-lg">Genre:</span>
                           <ul className="flex gap-2">
                             {genres.map((item, i) => (
-                              <li className="bg-gray-600 p-1 text-sm rounded" key={i}>{item}</li> 
+                              <li className="bg-gray-500 p-1 text-sm rounded" key={i}>{item}</li> 
                             ))}
                           </ul>
                 </div>

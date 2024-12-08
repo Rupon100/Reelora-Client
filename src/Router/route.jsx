@@ -10,6 +10,7 @@ import FavoriteMovie from "../Pages/FavoriteMovie";
 import Allmovie from "../Pages/Allmovie";
 import PrivateRoute from "../Provider/PrivateRoute";
 import Details from "../Components/Details";
+import UpdateDetails from "../Pages/UpdateDetails";
 
  
 
@@ -46,6 +47,11 @@ const route = createBrowserRouter([
                 path: '/details/:id',
                 element: <Details></Details>,
                 loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+            },
+            {
+                path: '/update/:id',
+                element: <UpdateDetails></UpdateDetails>,
+                loader: ({params}) => fetch(`http://localhost:5000/update/${params.id}`)
             },
             {
                 path: '/blog',

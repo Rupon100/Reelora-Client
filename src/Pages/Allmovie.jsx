@@ -1,18 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import Movie from "../Components/Movie";
 import { authContext } from "../Context/AuthContext";
-
+import { FadeLoader } from "react-spinners";
  
 
 const Allmovie = () => {
-    const {movies, setMovies, isLight} = useContext(authContext);
-    const  [ originalMovies, setOriginalMovies ] = useState([])
+    const {movies, setMovies, isLight, loading, setLoading} = useContext(authContext);
+    const  [ originalMovies, setOriginalMovies ] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+
     useEffect(() => {
+        setLoading(true)
         fetch('http://localhost:5000')
         .then(res => res.json())
         .then(data => {
             setMovies(data);
             setOriginalMovies(data);
+        })
+        .finally(() => {
+            setLoading(false)
         })
     } ,[]);
 
@@ -25,6 +31,10 @@ const Allmovie = () => {
             movie.title.toLowerCase().includes(query.toLowerCase())
         ) 
         setMovies(querySearch);
+    }
+
+    const handleShowAll = () => {
+        setShowAll(true)
     }
 
     return (
@@ -47,19 +57,22 @@ const Allmovie = () => {
 
            <div className="max-w-5xl mx-auto">
                 {
-                    movies.length === 0 ? (
-                        <div>
-                            <h1 className={`font-semibold text-2xl md:text-4xl  ${isLight ? 'text-white' : 'text-black'} `}>No Data Found</h1>
-                        </div>
-                    ) : (
+                    loading  &&  <div className="max-w-5xl mx-auto flex justify-center items-center"><FadeLoader color="#0b9659" /></div>
+                }
+                {
+                    movies.length > 0  && (
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
                         {
-                            movies.map((movie, i) => <Movie key={i} movie={movie}></Movie>)
+                            movies.slice(0, showAll ? movies.length : 6).map((movie, i) => <Movie key={i} movie={movie}></Movie>)
                         }
                         </div>
                     )
                 }
+           </div>
+
+           <div className="max-w-5xl mx-auto my-4">
+              <button onClick={handleShowAll} className={`border ${isLight ? 'bg-white' : 'bg-black text-white'} p-2 rounded`}>See All Movies</button>
            </div>
 
         </div>

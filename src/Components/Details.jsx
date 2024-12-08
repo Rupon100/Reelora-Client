@@ -6,12 +6,27 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Details = () => {
-    const { loading, setLoading, movies, setMovies, favmovie, setFavmovie, isLight, isIn } = useContext(authContext);
+    const { user, loading, setLoading, movies, setMovies, favmovie, setFavmovie, isLight, isIn } = useContext(authContext);
     const navigate = useNavigate();
     const loaderData = useLoaderData();
-    const { _id, email, poster, title, year, genre, msg, time, rating } = loaderData;
+    const { _id, email , poster, title, year, genre, msg, time, rating } = loaderData;
+
+    const favAdd = {
+        _id: _id,
+        email: user.email,
+        poster: poster,
+        title: title,
+        year: year, 
+        genre: genre,
+        msg: msg,
+        time: time,
+        rating: rating
+    }
+
     const [newFav, setNewFav] = useState([]);
     const genres = Array.isArray(genre) ? genre : [genre];
+
+    console.log(newFav)
 
     useEffect(() => {
         fetch('http://localhost:5000/favmovie')
@@ -70,7 +85,7 @@ const Details = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(loaderData)
+            body: JSON.stringify(favAdd)
         })
         .then(res => res.json())
         .then(data => {
@@ -93,7 +108,6 @@ const Details = () => {
     }
     }
 
-    console.log(genre)
 
     return (
         <div className={`min-h-screen flex justify-center ${isLight ? 'bg-gradient-to-r from-black to-gray-800 ' : 'bg-white'}  text-white`}>
